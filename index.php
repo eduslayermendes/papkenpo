@@ -14,6 +14,9 @@ include 'auth.php';
 <?php if (estadosessao()): ?>
     <h1>Bem vindos ao portal</h1>
         <p>Olá, <?php echo htmlspecialchars(buscaremail()); ?>! Sessão iniciada com sucesso.</p>
+        <?php if (isAdmin()): ?>
+            <p><a href="admin.php">Painel de Administração</a></p>
+        <?php endif; ?>
         <a href="logout.php">Terminar Sessão</a>
     <?php else: ?>
         <h1>Bem vindos ao portal</h1>
