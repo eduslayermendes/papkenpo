@@ -2,7 +2,7 @@
 include 'auth.php';
 
 // Verifica se o utilizador está autenticado e é administrador
-if (!estadosessao() || !isAdmin()) {
+if (!sessionstatus() || !isAdmin()) {
     header("Location: index.php"); // Redireciona para a página inicial se não for admin
     exit();
 }

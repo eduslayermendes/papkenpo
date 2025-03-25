@@ -3,23 +3,41 @@ include 'conexao.php';
 session_start();
 
 // Função para verificar se o utilizador está autenticado
-function estadosessao() {
+function sessionstatus() {
     return isset($_SESSION["email"]);
 }
 
 // Função para obter o email do utilizador autenticado
-function buscaremail() {
+function getemail() {
     return $_SESSION["email"] ?? '';
+}
+function getnome() {
+    global $liga;
+    
+    
+    
+    $email = getemail();
+    $sql = "SELECT nome FROM utilizador WHERE email = ?";
+    $stmt = $liga->prepare($sql);
+    $stmt->bind_param("s", $email);
+    $stmt->execute();
+    $result = $stmt->get_result();
+    
+    if ($row = $result->fetch_assoc()) {
+        return $row['nome'];
+    }
+    
+    return '';
 }
 // Função para verificar se o utilizador é administrador
 function isAdmin() {
     global $liga;
     
-    if (!estadosessao()) {
+    if (!sessionstatus()) {
         return false;
     }
 
-    $email = buscaremail();
+    $email = getemail();
     $sql = "SELECT admin FROM utilizador WHERE email = ?";
     $stmt = $liga->prepare($sql);
     $stmt->bind_param("s", $email);
@@ -32,4 +50,5 @@ function isAdmin() {
 
     return false;
 }
+
 ?>

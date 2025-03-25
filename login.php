@@ -2,7 +2,7 @@
 include 'auth.php';
 
 // Se a sessão já estiver iniciada, redireciona para a página principal
-if (estadosessao()) {
+if (sessionstatus()) {
     header("Location: index.php");
     exit();
 }
