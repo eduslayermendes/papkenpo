@@ -51,7 +51,7 @@ $email = htmlspecialchars(getemail()); // Supondo que haja uma função getemail
         
             <p><strong>Nome:</strong> <?php echo $nome; ?></p>
             <p><strong>Email:</strong> <?php echo $email; ?></p>
-        
+       
         <a class="logout" href="logout.php">Terminar Sessão</a>
     
 </body>

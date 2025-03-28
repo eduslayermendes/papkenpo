@@ -1,0 +1,37 @@
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    background-color: #f4f4f4;
+    color: #333;
+}
+h1 {
+    background-color: #333;
+    color: #fff;
+    padding: 5px;
+    margin: 0;
+    display: flex;
+    justify-content: space-between ;
+    align-items: center;
+}
+.loginbutton
+{
+    display: flex;
+    gap: 5px;
+}
+.loginbutton a
+{
+    background-color: #333;
+    color: #fff;
+    padding: 5px;
+    text-decoration: none;
+    border: 1px solid #333;
+    text-align: center;
+    vertical-align: center;
+}
+.loginbutton a:hover
+{
+    background-color: #fff;
+    color: #333;
+}
+
