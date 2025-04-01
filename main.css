@@ -13,6 +13,9 @@ h1 {
     display: flex;
     justify-content: space-between ;
     align-items: center;
+    position: relative;
+    z-index: 10;
+    min-height: 50px; /* Para evitar que elementos menores "empurrem" */
 }
 .loginbutton
 {
