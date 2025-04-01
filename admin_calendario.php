@@ -56,8 +56,10 @@ if (!sessionstatus() || !isAdmin()) {
                     // Converte datas para formato compatível com MySQL (YYYY-MM-DD HH:MM:SS)
                     let dataInicio = info.startStr;
                     let dataFim = info.endStr ? info.endStr : dataInicio;
+
                     console.log("Data Início: ", dataInicio);  // Depuração
                     console.log("Data Fim: ", dataFim);  // Depuração
+                    
                     if (titulo && organizador && local && descricao && preco) {
                         fetch('add_event.php', {
                             method: 'POST',

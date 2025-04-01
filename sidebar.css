@@ -1,0 +1,129 @@
+/* Sidebar principal */
+.sidebar {
+    width: 250px;
+    height: 100%;
+    position: fixed;
+    top: 0;
+    left: 0;
+    background-color: #333;
+    color: #fff;
+    transition: transform 0.3s ease-in-out;
+    z-index: 100;
+    overflow-y: auto;
+    padding-top: 60px; /* Espaço para o cabeçalho do site */
+}
+
+/* Sidebar fechada */
+.sidebar.closed {
+    transform: translateX(-250px);
+}
+
+/* Botão para abrir/fechar sidebar */
+.toggle-sidebar {
+    position: fixed;
+    left: 250px;
+    top: 70px;
+    background-color: #333;
+    color: #fff;
+    border: none;
+    border-radius: 0 4px 4px 0;
+    padding: 10px;
+    cursor: pointer;
+    z-index: 101;
+    transition: left 0.3s ease-in-out;
+}
+
+.toggle-sidebar.closed {
+    left: 0;
+}
+
+/* Seções da sidebar */
+.sidebar-section {
+    border-bottom: 1px solid #444;
+}
+
+.sidebar-section-header {
+    padding: 15px;
+    cursor: pointer;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.sidebar-section-header:hover {
+    background-color: #444;
+}
+
+/* Menu dropdown */
+.sidebar-dropdown {
+    max-height: 0;
+    overflow: hidden;
+    transition: max-height 0.3s ease-out;
+}
+
+.sidebar-dropdown.active {
+    max-height: 500px; /* Altura máxima quando aberto */
+}
+
+/* Itens do menu de cintos */
+.cinto-item {
+    padding: 10px 15px 10px 25px;
+    display: flex;
+    align-items: center;
+    cursor: pointer;
+    transition: background-color 0.2s;
+}
+
+.cinto-item:hover {
+    background-color: #444;
+}
+
+.cinto-item.atual {
+    background-color: #555;
+    border-left: 4px solid #f4f4f4;
+}
+
+/* Indicador visual de cinto */
+.cinto-cor {
+    width: 20px;
+    height: 20px;
+    border-radius: 50%;
+    margin-right: 10px;
+    border: 1px solid #ccc;
+}
+
+/* Cores dos cintos */
+.cinto-branco { background-color: white; }
+.cinto-amarelo { background-color: yellow; }
+.cinto-laranja { background-color: orange; }
+.cinto-purpura { background-color: purple; }
+.cinto-azul { background-color: blue; }
+.cinto-verde { background-color: green; }
+.cinto-castanho1, .cinto-castanho2, .cinto-castanho3 { background-color: #8B4513; }
+.cinto-negro { background-color: black; }
+
+/* Ajuste do conteúdo principal quando sidebar estiver aberta */
+.main-content {
+    margin-left: 250px;
+    padding: 15px;
+    transition: margin-left 0.3s ease-in-out;
+}
+
+.main-content.full {
+    margin-left: 0;
+}
+
+/* Responsividade */
+@media (max-width: 768px) {
+    .sidebar {
+        width: 200px;
+    }
+    
+    .toggle-sidebar {
+        left: 200px;
+    }
+    
+    .main-content {
+        margin-left: 200px;
+    }
+}
