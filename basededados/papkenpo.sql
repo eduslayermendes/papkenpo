@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Tempo de geração: 18-Mar-2025 às 13:08
+-- Tempo de geração: 01-Abr-2025 às 17:49
 -- Versão do servidor: 10.4.32-MariaDB
 -- versão do PHP: 8.2.12
 
@@ -41,7 +41,8 @@ CREATE TABLE `alunos` (
 
 INSERT INTO `alunos` (`id_aluno`, `Nome`, `email`, `telefone`, `graduacao`) VALUES
 (1, 'edu teste1', 'edudinis44@gmail.com', '912414328', 'amarelo'),
-(2, 'dinis test2', 'edudinis@sapo.pt', '987654321', 'purpura');
+(2, 'dinis test2', 'edudinis@sapo.pt', '987654321', 'purpura'),
+(3, 'leonor', 'leonoremail@sapo.pt', '123456789', 'purpura');
 
 -- --------------------------------------------------------
 
@@ -51,10 +52,23 @@ INSERT INTO `alunos` (`id_aluno`, `Nome`, `email`, `telefone`, `graduacao`) VALU
 
 CREATE TABLE `evento` (
   `id_evento` int(11) NOT NULL,
+  `titulo` varchar(255) NOT NULL,
   `organizador` varchar(255) NOT NULL,
   `local` varchar(255) NOT NULL,
-  `etc` varchar(255) NOT NULL
+  `descricao` text NOT NULL,
+  `preco` decimal(10,2) NOT NULL DEFAULT 0.00,
+  `data_inicio` date NOT NULL,
+  `data_fim` date NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Extraindo dados da tabela `evento`
+--
+
+INSERT INTO `evento` (`id_evento`, `titulo`, `organizador`, `local`, `descricao`, `preco`, `data_inicio`, `data_fim`) VALUES
+(5, 'Evento Teste', 'Organizador', 'Local', 'Descrição', 20.00, '2025-03-30', '2025-03-30'),
+(6, 'evento top', 'eu', 'fixe', 'desc', 0.00, '2025-03-31', '2025-04-01'),
+(7, 'teste', 'eu', 'forte', 'desc', 0.00, '2025-04-02', '2025-04-04');
 
 -- --------------------------------------------------------
 
@@ -63,9 +77,17 @@ CREATE TABLE `evento` (
 --
 
 CREATE TABLE `evento_participantes` (
-  `idevento` int(11) NOT NULL,
-  `idutilizador` int(11) NOT NULL
+  `id_evento` int(11) NOT NULL,
+  `id_utilizador` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Extraindo dados da tabela `evento_participantes`
+--
+
+INSERT INTO `evento_participantes` (`id_evento`, `id_utilizador`) VALUES
+(6, 1),
+(6, 5);
 
 -- --------------------------------------------------------
 
@@ -90,8 +112,8 @@ CREATE TABLE `utilizador` (
 --
 
 INSERT INTO `utilizador` (`id_utilizador`, `idaluno`, `email`, `password`, `nome`, `telefone`, `graduacao`, `admin`, `block`) VALUES
-(1, 2, 'edudinis@sapo.pt', '$2y$10$gP3j0hD6bnGtfnp0TZb9ue97swY28nho3foQSD50CkCWosUKbY.0u', NULL, NULL, NULL, NULL, NULL),
-(5, 1, 'edudinis44@gmail.com', '$2y$10$GW.tLgOvyACS1cSmrpGRTuvMLoZBA3uQG0OvkzmbV8WQPoUOSvc3i', NULL, NULL, NULL, 1, NULL);
+(1, 2, 'edudinis@sapo.pt', '$2y$10$gP3j0hD6bnGtfnp0TZb9ue97swY28nho3foQSD50CkCWosUKbY.0u', 'eduardo', NULL, 'branco', NULL, NULL),
+(5, 1, 'edudinis44@gmail.com', '$2y$10$GW.tLgOvyACS1cSmrpGRTuvMLoZBA3uQG0OvkzmbV8WQPoUOSvc3i', 'dinis', NULL, 'castanho1', 1, NULL);
 
 --
 -- Índices para tabelas despejadas
@@ -113,8 +135,8 @@ ALTER TABLE `evento`
 -- Índices para tabela `evento_participantes`
 --
 ALTER TABLE `evento_participantes`
-  ADD PRIMARY KEY (`idevento`,`idutilizador`),
-  ADD KEY `FK_idutilizador` (`idutilizador`);
+  ADD PRIMARY KEY (`id_evento`,`id_utilizador`),
+  ADD KEY `FK_idutilizador` (`id_utilizador`);
 
 --
 -- Índices para tabela `utilizador`
@@ -132,13 +154,13 @@ ALTER TABLE `utilizador`
 -- AUTO_INCREMENT de tabela `alunos`
 --
 ALTER TABLE `alunos`
-  MODIFY `id_aluno` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `id_aluno` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
 -- AUTO_INCREMENT de tabela `evento`
 --
 ALTER TABLE `evento`
-  MODIFY `id_evento` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id_evento` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
 
 --
 -- AUTO_INCREMENT de tabela `utilizador`
@@ -154,8 +176,8 @@ ALTER TABLE `utilizador`
 -- Limitadores para a tabela `evento_participantes`
 --
 ALTER TABLE `evento_participantes`
-  ADD CONSTRAINT `FK_idevento` FOREIGN KEY (`idevento`) REFERENCES `evento` (`id_evento`),
-  ADD CONSTRAINT `FK_idutilizador` FOREIGN KEY (`idutilizador`) REFERENCES `utilizador` (`id_utilizador`);
+  ADD CONSTRAINT `FK_idevento` FOREIGN KEY (`id_evento`) REFERENCES `evento` (`id_evento`),
+  ADD CONSTRAINT `FK_idutilizador` FOREIGN KEY (`id_utilizador`) REFERENCES `utilizador` (`id_utilizador`);
 
 --
 -- Limitadores para a tabela `utilizador`
